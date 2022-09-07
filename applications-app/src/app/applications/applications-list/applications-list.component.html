@@ -1,0 +1,23 @@
+<h1>Applications List</h1>
+<table class="table table-hover table-bordered table-scroll" *ngIf="!isDataLoading else loadData">
+  <thead>
+    <tr>
+      <th>Application Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="error">
+      <td colspan="3">An error occurred, please try again later...</td>
+    </tr>
+    <tr *ngFor="let app of applications" (click)="goToApp(app)" role="link">
+      <td>{{ app.id }}</td>
+      <td>{{ app.firstName }}</td>
+      <td>{{ app.lastName }}</td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #loadData>
+  <app-info-loader></app-info-loader>
+</ng-template>
