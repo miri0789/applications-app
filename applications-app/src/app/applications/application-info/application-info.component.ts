@@ -19,12 +19,13 @@ export class ApplicationInfoComponent implements OnInit, OnDestroy {
   error: Error;
   appRoute = appRoute;
   private subscribers = new Subscription();
+  
   constructor(private applicationsService: ApplicationsService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
     const appId = Number(this.route.snapshot.paramMap.get('appId'));
-    if (appId && !isNaN(appId)) {
+    if (!isNaN(appId)) {
       this.isDataLoading = true;
       forkJoin([this.applicationsService.getApplication(appId),
         this.applicationsService.getCardsTransactions(appId)])
